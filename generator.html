@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Three-Point Perspective Grid Generator</title>
+<style>
+.slidecontainer {
+	width: 100%;
+}
+
+.slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 25px;
+}
+
+.slides {
+	width: 100%;
+}
+
+.dude {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 4em;
+	padding-left: 10px;
+	padding-right: 10px;
+	float: left;
+}
+
+.lemon {
+	background-color: lemonchiffon;
+}
+
+.spacer {
+	height: 4em;
+	overflow: hidden;
+}
+
+body {
+	font-family: monospace;
+	background-color: maroon;
+}
+
+.btn {
+	border: 2px solid yellowgreen;
+	background-color: purple;
+	color: yellowgreen;
+	font-family: monospace;
+	float: left;
+	margin-right: -2px;
+}
+
+[data-fov] {
+	background-color: darkkhaki;
+}
+
+[data-canvas] {
+	background-color: saddlebrown;
+	color: lemonchiffon;
+}
+
+[data-rotation] {
+	background-color: chocolate;
+}
+
+[data-dvp] {
+	background-color: bisque;
+}
+
+[data-tilt] {
+	background-color: tan;
+}
+
+[data-linewidth] {
+	background-color: RosyBrown;
+}
+
+[data-lefty] {
+	background-color: khaki;
+}
+
+[data-righty] {
+	background-color: darkgoldenrod;
+}
+
+[data-btnspacer] {
+	background-color: yellowgreen;
+	overflow: hidden;
+}
+
+[data-drawing] {
+	background-color: white;
+	display: inline-block;
+}
+
+</style>
+</head>
+<body>
+
+	<div class="dude" data-fov>
+		<label for="FOV">Field of View</label>
+		<br>
+		<input type="text" id="FOV" class="lemon" value="25" onchange="checkValue('FOV')" />
+		<form>
+			<input type="radio" name="hi" class="lemon" id="fovhorizontal" onchange="checkValue('fovhorizontal')" > Horizontal
+			<input type="radio" name="hi" class="lemon" id="fovvertical" onchange="checkValue('fovvertical')" > Vertical
+		</form>
+	</div>
+
+	<div class="dude" data-canvas>
+		<label for="width">Width of Canvas</label>
+		<br>
+		<input type="text" id="width" value="660" class="lemon" onchange="checkValue('width')" />
+	</div>
+
+	<div class="dude" data-canvas>
+		<label for="height">Height of Canvas</label>
+		<br>
+		<input type="text" id="height" value="510" class="lemon" onchange="checkValue('height')" />
+	</div>
+
+	<div class="spacer" data-canvas></div>
+
+	<div class="slidecontainer" data-fov>
+	<input type="range" id="fovslider" class="slides" oninput="checkValue('fovslider')" min="0" max="180" step="0.01" value="25" />
+	</div>
+
+	<div class="dude" data-rotation>
+		<label for="rotation">Rotation of Field of View</label>
+		<br>
+		<input type="text" id="rotation" value="0" class="lemon" onchange="checkValue('rotation')" />
+	</div>
+
+	<div class="dude" data-dvp>
+		<label for="linestopdvp">Number of Lines to Top DVP</label>
+		<br>
+		<input type="text" id="linestopdvp" value="20" class="lemon" onchange="checkValue('linestopdvp')" />
+		<input type="color" id="colortopdvp" value="#FFFF00" class="lemon" onchange="checkValue('colortopdvp')" />
+	</div>
+
+	<div class="dude" data-dvp>
+		<label for="linesleftdvp">Number of Lines to Left DVP</label>
+		<br>
+		<input type="text" id="linesleftdvp" value="20" class="lemon" onchange="checkValue('linesleftdvp')" />
+		<input type="color" id="colorleftdvp" value="#FF00FF" class="lemon" onchange="checkValue('colorleftdvp')" />
+	</div>
+
+	<div class="dude" data-dvp>
+		<label for="linesrightdvp">Number of Lines to Right DVP</label>
+		<br>
+		<input type="text" id="linesrightdvp" value="20" class="lemon" onchange="checkValue('linesrightdvp')" />
+		<input type="color" id="colorrightdvp" value="#00FFFF" class="lemon" onchange="checkValue('colorrightdvp')" />
+	</div>
+
+	<div class="spacer" data-dvp></div>
+
+	<div class="slidecontainer" data-rotation>
+	<input type="range" id="rotationslider" class="slides" oninput="checkValue('rotationslider')" min="-360" max="360" step="0.01" value="0" />
+	</div>
+
+	<div class="dude" data-tilt>
+		<label for="tilt">Horizon Tilt</label>
+		<br>
+		<input type="text" id="tilt" value="35.3" class="lemon" onchange="checkValue('tilt')" />
+	</div>
+
+	<div class="dude" data-tilt>
+		<label for="linesbottom">Number of Lines to Bottom Vanishing Point</label>
+		<br>
+		<input type="text" id="linesbottom" value="20" class="lemon" onchange="checkValue('linesbottom')" />
+		<input type="color" id="colorbottom" value="#0000FF" class="lemon" onchange="checkValue('colorbottom')" />
+	</div>
+
+	<div class="dude" data-linewidth>
+		<label for="linewidth">Width of Lines</label>
+		<br>
+		<input type="text" id="linewidth" value="0.5" class="lemon" onchange="checkValue('linewidth')" />
+	</div>
+
+	<div class="dude" data-linewidth>
+		<label for="dvplinewidth">Width of DVP Lines</label>
+		<br>
+		<input type="text" id="dvplinewidth" value="0.25" class="lemon" onchange="checkValue('dvplinewidth')" />
+	</div>
+
+	<div class="spacer" data-linewidth></div>
+
+	<div class="slidecontainer" data-tilt>
+	<input type="range" id="tiltslider" class="slides" oninput="checkValue('tiltslider')" min="-360" max="360" step="0.01" value="0" />
+	</div>
+
+	<div class="dude" data-lefty>
+		<label for="leftangle">Angle to the Left</label>
+		<br>
+		<input type="text" id="leftangle" value="45" class="lemon" onchange="checkValue('leftangle')" />
+	</div>
+
+	<div class="dude" data-lefty>
+		<label for="linesleft">Number of Lines to Left Vanishing Point</label>
+		<br>
+		<input type="text" id="linesleft" value="20" class="lemon" onchange="checkValue('linesleft')" />
+		<input type="color" id="colorleft" value="#FF0000" class="lemon" onchange="checkValue('colorleft')" />
+	</div>
+
+	<div class="dude" data-righty>
+		<label for="rightangle">Angle to the Right</label>
+		<br>
+		<input type="text" id="rightangle" value="45" class="lemon" onchange="checkValue('rightangle')" />
+	</div>
+
+	<div class="dude" data-righty>
+		<label for="linesright">Number of Lines to Right Vanishing Point</label>
+		<br>
+		<input type="text" id="linesright" value="20" class="lemon" onchange="checkValue('linesright')" />
+		<input type="color" id="colorright" value="#00FF00" class="lemon" onchange="checkValue('colorright')" />
+	</div>
+
+	<div class="spacer" data-righty></div>
+
+	<div class="slidecontainer" data-righty>
+	<input type="range" id="angleslider" class="slides" oninput="checkValue('angleslider')" min="-360" max="360" step="0.01" value="45" />
+	</div>
+
+	<input type="button" class="btn" id="randomcube" value="Random Cube" onclick="randomCube();" />
+	<input type="button" class="btn" id="exportcube" value="Export PNG" onclick="exportCube();" />
+	<input type="button" class="btn" id="savecube" value="Save Settings" onclick="saveCube();" />
+	<input type="button" class="btn" id="loadcube" value="Load Settings" onclick="loadCube();" />
+	<input type="button" class="btn" id="resetcube" value="Default" onclick="resetCube();" />
+
+	<div data-btnspacer>
+		<input type="button" class="btn" data-btnspacer />
+	</div>
+
+	<img id="doubledrawing" data-drawing></img>
+	<div id="drawing" hidden></div>
+
+	<script src="svg.js"></script>
+	<script src="generator.js"></script>
+	<script>
+		setTimeout(function(){ loadCube(); }, 100);
+	</script>
+</body>
+</html>
